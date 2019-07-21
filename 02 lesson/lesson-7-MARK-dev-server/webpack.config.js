@@ -15,14 +15,20 @@ module.exports = {
 		port: 8080,
 		hot: true,
 		hotOnly: true,
+		// 前端配置中，就算是访问一个非法路径，也会将请求导向到正确的单页面应用路径
+		// 最终部署的时候注意配置好后端路由
 		historyApiFallback: true,
+		// 详细配置解释参见：https://www.jianshu.com/p/f489e7764cb8
 		proxy: {
 			'/react/api': {
 				target: 'https://www.dell-lee.com',
 				secure: false,
+				// https://blog.csdn.net/weixin_40920953/article/details/85150784
+				// pathRewrite 就是对匹配的值替换
 				pathRewrite: {
 					'header.json': 'demo.json'
 				},
+				// 
 				changeOrigin: true,
 				headers: {
 					host: 'www.dell-lee.com',
